@@ -1,0 +1,25 @@
+{
+  "name": "oanda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhs007/oanda.git"
+  },
+  "author": "zhs007",
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/zhs007/oanda/issues"
+  },
+  "homepage": "https://github.com/zhs007/oanda#readme",
+  "dependencies": {
+    "@oanda/v20": "^3.0.18-16",
+    "jarvis-task": "^1.3.55",
+    "moment": "^2.20.1",
+    "mysql2": "^1.5.1"
+  }
+}
