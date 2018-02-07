@@ -1,6 +1,6 @@
 "use strict";
 
-const { createContext } = require('../lib/oanda');
+const { createContext, countTradingDay } = require('../lib/oanda');
 const fs = require('fs');
 const moment = require('moment');
 const util = require('util');
@@ -36,11 +36,16 @@ function getPriceStream(sctx, accountid, instruments) {
     );
 }
 
-function getHistory(ctx, accountid, instrument) {
+function getHistory(ctx, instrument, ymd) {
+    let td = countTradingDay(ymd);
+    if (td == undefined) {
+        return ;
+    }
+
     ctx.instrument.candles(instrument, {
         price: 'BA',
-        from: moment('2017-02-01 00:00:00').utc().format(),
-        to: moment('2017-02-02 00:00:00').utc().format(),
+        from: td.begintime,
+        to: td.endtime,
         granularity: 'M1'
     }, (response1) => {
         console.log(JSON.stringify(response1));
@@ -67,7 +72,7 @@ ctx.account.list((response) => {
 
             // getPriceStream(streamctx, curaccountid, ['EUR_USD', 'USD_CAD']);
 
-            getHistory(ctx, curaccountid, 'EUR_USD');
+            getHistory(ctx, 'EUR_USD', '2017-02-05');
         });
     }
 });
